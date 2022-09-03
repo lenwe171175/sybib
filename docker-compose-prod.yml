@@ -1,0 +1,52 @@
+services:
+  sybib:
+    container_name: "sybib"
+    build: .
+    restart: unless-stopped
+    expose:
+      - 8000
+    networks:
+      - web
+      - sybib-internal
+    env_file:
+      - .env
+    links:
+      - postgres
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.sybib.rule=Host(`${URL}`)
+      - traefik.http.routers.sybib.entrypoints=websecure
+    depends_on:
+      postgres:
+        condition: service_healthy
+ 
+  postgres:
+    container_name: "postgres-db"
+    image: bitnami/postgresql:14
+    restart: unless-stopped
+    networks:
+      - sybib-internal
+    environment:
+      - POSTGRESQL_USERNAME=${DB_USERNAME}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+      - POSTGRESQL_DATABASE=${DB_NAME}
+      - POSTGRESQL_POSTGRES_PASSWORD=${DB_PASSWORD}
+    volumes:
+      - ./db_data/postgres-data/:/bitnami/postgresql
+    expose:
+      - 5432
+    hostname: ${DB_ADDR}
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U postgres" ]
+      start_period: 5s
+      interval: 30s
+      timeout: 5s
+      retries: 5
+
+networks:
+  web:
+    external: true
+  sybib-internal:
+    driver: bridge
+    internal: true
+
