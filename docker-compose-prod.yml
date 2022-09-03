@@ -21,7 +21,7 @@ services:
         condition: service_healthy
  
   postgres:
-    container_name: "postgres-db"
+    container_name: "postgres-sybib-db"
     image: bitnami/postgresql:14
     restart: unless-stopped
     networks:
