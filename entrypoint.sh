@@ -15,7 +15,7 @@ echo "Collecting static files"
 python3 manage.py collectstatic --noinput --clear
 
 echo "Starting Server with Gunicorn"
-gunicorn kin214.wsgi:application --bind 0.0.0.0:8000
+gunicorn sybib.wsgi:application --bind 0.0.0.0:8000
 
 else
 
