@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}SYBIB | Accueil{% endblock %}
+{% block content %}
+
+<div class="ui stackable center aligned middle aligned grid">
+    <div class="eight wide column">
+        <a href = "{% url "add_book" %}">
+        <div class="ui segment">
+            <div class="ui icon header">
+                <i class="address book blue icon"></i>
+                Ajouter un livre
+            </div>
+            <div class="inline">lorem ipsum</div>
+        </div>
+        </a>
+    </div>
+    <div class="eight wide column">
+        <a href =#>
+        <div class="ui segment">
+            <div class="ui icon header">
+                <i class="map marker alternate blue icon"></i>
+                Répertoire
+            </div>
+            <div class="inline">Lorem ipsum</div>
+        </div>
+        </a>
+    </div>
+</div>
+{% endblock %}
