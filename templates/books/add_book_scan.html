@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% block title %}SYBIB | Scan book{% endblock %}
+{% block content %}
+
+<script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
+
+<div class="ui middle stackable aligned center aligned grid">
+  <div class="eight wide column">
+    <form id="form_isbn" class="ui large fluid form" action ="{% url "add_book_scan" %}" method="POST">
+      <div class="ui segment">
+        <div class="ui blue header">Scanner un livre</div>
+        <div id="reader" width="600px" height="600px"></div>
+        {% csrf_token %}
+        {% for field in form %}
+          {% if field.errors %}
+          <div class = "error field">
+          {% else %}
+          <div class = "field">
+          {% endif %}
+          {{ field.as_hidden }}
+          {% if field.errors %}
+          <div class = "ui pointing red basic label">
+          {% for error in field.errors %}
+            {{ error|title }}
+          {% endfor %}
+          </div>
+        {% endif %}
+          </div>
+      {% endfor %}
+        </div>
+    </form>
+    </div>
+</div>
+
+<script>
+function onScanSuccess(decodedText, decodedResult) {
+  // handle the scanned code as you like, for example:
+  console.log(`Code matched = ${decodedText}`, decodedResult);
+  document.getElementById('id_isbn').value = decodedText;
+  document.getElementById('form_isbn').submit();
+}
+
+function onScanFailure(error) {
+  // handle scan failure, usually better to ignore and keep scanning.
+  // for example:
+  console.warn(`Code scan error = ${error}`);
+}
+
+let html5QrcodeScanner = new Html5QrcodeScanner(
+  "reader",
+  { fps: 10, qrbox: {width: 500, height: 250} },
+  /* verbose= */ false);
+html5QrcodeScanner.render(onScanSuccess, onScanFailure);
+</script>
+
+{% endblock %}

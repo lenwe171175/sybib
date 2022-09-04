@@ -5,13 +5,24 @@
 
 <div class="ui stackable center aligned middle aligned grid">
     <div class="eight wide column">
+        <a href = "{% url "add_book_scan" %}">
+        <div class="ui segment">
+            <div class="ui icon header">
+                <i class="barcode blue icon"></i>
+                Scanner un livre
+            </div>
+            <div class="inline">Prendre en photo un code ISBN</div>
+        </div>
+        </a>
+    </div>
+    <div class="eight wide column">
         <a href = "{% url "add_book" %}">
         <div class="ui segment">
             <div class="ui icon header">
-                <i class="address book blue icon"></i>
-                Ajouter un livre
+                <i class="keyboard outline blue icon"></i>
+                Ajouter un livre manuellement
             </div>
-            <div class="inline">lorem ipsum</div>
+            <div class="inline">Saisir l'ISBN à la main</div>
         </div>
         </a>
     </div>
@@ -19,7 +30,7 @@
         <a href =#>
         <div class="ui segment">
             <div class="ui icon header">
-                <i class="map marker alternate blue icon"></i>
+                <i class="book blue icon"></i>
                 Répertoire
             </div>
             <div class="inline">Lorem ipsum</div>
