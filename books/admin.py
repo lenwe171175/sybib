@@ -6,4 +6,4 @@ from .models import Book, Reference
 
 @admin.register(Book)
 class BookAdmin(admin.ModelAdmin):
-    list_display = ("isbn","search_completed")
+    list_display = ("isbn","quantity","search_completed")

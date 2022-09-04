@@ -6,6 +6,7 @@ from django.db.models.deletion import CASCADE
 class Book(models.Model):
     isbn = models.CharField(max_length=200)
     scan_date = models.DateTimeField(auto_now_add=True)
+    quantity= models.IntegerField(default=1)
     search_completed = models.BooleanField(default=False)
 
     def __unicode__(self):
