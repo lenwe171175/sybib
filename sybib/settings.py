@@ -140,3 +140,7 @@ CSRF_TRUSTED_ORIGINS = [URL_CSRF]
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Celery
+CELERY_BROKER_URL = f"redis://{environ['REDIS_ADDR']}:6379"
+CELERY_BACKEND=f"redis://{environ['REDIS_ADDR']}:6379"

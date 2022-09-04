@@ -8,6 +8,8 @@ from .models import Book
 
 from django.views import View
 
+from .tasks import get_reference_from_open_library
+
 # Create your views here.
 
 def index(request):
@@ -33,6 +35,7 @@ class AddBook(View):
                 messages.success(request, "ISBN déjà existant - quantité modifiée")
             else:
                 form.save()
+                get_reference_from_open_library.delay(isbn)
                 messages.success(request, "Ajout réussi")
             return redirect(index)
         else:

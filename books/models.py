@@ -12,5 +12,12 @@ class Book(models.Model):
     def __unicode__(self):
         return self.isbn
 
-class Reference(models.Model):
+class OpenApiReference(models.Model):
     book = models.OneToOneField(Book, on_delete=CASCADE)
+    publisher = models.CharField(max_length=250)
+    number_of_pages = models.CharField(max_length=250)
+    title = models.CharField(max_length=250)
+    publish_date=models.CharField(max_length=250)
+
+    def __unicode__(self):
+        return self.book
